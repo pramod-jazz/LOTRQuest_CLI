@@ -49,7 +49,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.game.test.App</mainClass>
+                            <mainClass>org.game.fantasy.Game</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
