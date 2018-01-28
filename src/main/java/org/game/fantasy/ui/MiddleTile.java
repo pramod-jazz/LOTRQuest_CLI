@@ -1,8 +1,10 @@
 package org.game.fantasy.ui;
 
-public class MiddleTile extends ConsolePrinter implements DisplayUnit {
+public class MiddleTile implements DisplayUnit {
 
     String tileName;
+    
+    ConsolePrinter printer = new ConsolePrinter();
 
 
     public MiddleTile(String tileName) {
@@ -11,6 +13,6 @@ public class MiddleTile extends ConsolePrinter implements DisplayUnit {
 
     @Override
     public void renderUI() {
-        printToConsole(tileName);
+    	printer.printToConsole(tileName);
     }
 }

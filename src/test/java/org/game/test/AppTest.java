@@ -3,6 +3,7 @@ package org.game.test;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
+import org.game.fantasy.Game;
 import org.game.fantasy.ui.DisplayUnit;
 import org.game.fantasy.ui.Header;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class AppTest {
 		String[] args = null;
 		header = new Header();
 		doNothing().when(header).renderUI();
-		;
+		
 
 		// Act
 		Game.main(args);
