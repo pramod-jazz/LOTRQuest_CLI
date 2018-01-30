@@ -19,13 +19,10 @@ import java.util.stream.Stream;
 public class Game {
 	public static void main(String[] args) {
 		System.out.println("Hello World 3 !");
-		DisplayUnit header = new Header();
-		header.renderUI();
-
-		new Delay(2).delayExecution();
-
-		DisplayUnit gandalfImage = new MiddleTile("gandalf.txt");
-		gandalfImage.renderUI();
+		showGreetings();
+		
+		GameMetadata.setupCharacters();
+		
 
 		// Arrays.asList(CharacterAvatar.class).forEach(System.out::println);
 
@@ -52,12 +49,24 @@ public class Game {
         System.out.print("Enter your character choice : ");
         int choiceNumber = scanner.nextInt();
         
+        
+        
         System.out.println("You have selected choice number " + choiceNumber +  " who is :" );
         
         new MiddleTile(CharacterAvatar.values()[choiceNumber].toString().toLowerCase() + ".txt").renderUI();
         
 		
 
+	}
+
+	private static void showGreetings() {
+		DisplayUnit header = new Header();
+		header.renderUI();
+
+		new Delay(2).delayExecution();
+
+		DisplayUnit gandalfImage = new MiddleTile("gandalf.txt");
+		gandalfImage.renderUI();
 	}
 
 }

@@ -6,13 +6,17 @@ import java.io.InputStreamReader;
 
 public class ConsolePrinter {
 
-    public void printToConsole(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Header.class.getClassLoader().getResourceAsStream(filePath)))) {
-            reader.lines().forEach(
-                    System.out::println
-            );
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
+	public void printToConsole(String filePath) {
+		try (BufferedReader reader = new BufferedReader(
+				new InputStreamReader(Header.class.getClassLoader().getResourceAsStream(filePath)))) {
+			reader.lines().forEach(System.out::println);
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public void printMessageToConsole(String customMessage) {
+		System.out.println(customMessage);
+	}
+
 }

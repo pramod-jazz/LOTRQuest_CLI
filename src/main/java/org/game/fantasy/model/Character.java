@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class Character {
 
+	public Character(Integer id, String characterAvatar, String characterName) {
+		super();
+		this.id = id;
+		this.characterAvatar = characterAvatar;
+		this.characterName = characterName;
+		
+	}
+
 	private Integer id;
 
 	private String characterAvatar;
@@ -12,7 +20,7 @@ public class Character {
 
 	private Date createdAt;
 
-	private Date updatedAt;
+
 
 	public Integer getId() {
 		return id;
@@ -42,16 +50,8 @@ public class Character {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setCreatedAt() {
+	   createdAt =	new Date();
 	}
 
 }
