@@ -3,6 +3,8 @@ package org.game.test;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
+import java.io.IOException;
+
 import org.game.fantasy.Game;
 import org.game.fantasy.ui.DisplayUnit;
 import org.game.fantasy.ui.Header;
@@ -21,19 +23,19 @@ public class GameTest {
 	DisplayUnit header;
 
 	@Test
-	public void testShouldPrintHeader() {
+	public void testShouldPrintHeader() throws IOException, InterruptedException {
 
 		// Arrange
 		String[] args = null;
 		header = new Header();
-		doNothing().when(header).renderUI();
+		doNothing().when(header).renderUI(false);
 		
 
 		// Act
 		Game.main(args);
 
 		// Assert
-		verify(header).renderUI();
+		verify(header).renderUI(false);
 
 	}
 

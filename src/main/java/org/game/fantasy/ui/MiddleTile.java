@@ -12,7 +12,7 @@ public class MiddleTile implements DisplayUnit {
     }
 
     @Override
-    public void renderUI() {
-    	printer.printToConsole(tileName);
+    public void renderUI(boolean isSameLine) {
+    	printer.printToConsole(tileName,isSameLine);
     }
 }

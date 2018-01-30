@@ -6,9 +6,9 @@ public class Header  implements DisplayUnit{
     ConsolePrinter printer = new ConsolePrinter();
     
     @Override
-    public void renderUI() {
+    public void renderUI( boolean isSameLine ) {
 
-    	printer.printToConsole(headerFile);
+    	printer.printToConsole(headerFile,isSameLine);
 
     }
 }

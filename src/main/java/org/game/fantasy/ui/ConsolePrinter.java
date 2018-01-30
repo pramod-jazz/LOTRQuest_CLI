@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 
 public class ConsolePrinter {
 
-	public void printToConsole(String filePath) {
+	public void printToConsole(String filePath,boolean isSameLine) {
 		try (BufferedReader reader = new BufferedReader(
 				new InputStreamReader(Header.class.getClassLoader().getResourceAsStream(filePath)))) {
-			reader.lines().forEach(System.out::println);
+			reader.lines().forEach(isSameLine ? System.out::println : System.out::println );
 		} catch (IOException e) {
 			System.out.println(e);
 		}

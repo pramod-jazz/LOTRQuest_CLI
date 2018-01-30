@@ -9,12 +9,13 @@ public class GameException extends RuntimeException {
 	
 	 public GameException(String message) {
          super(message);
+         logger.error(message);
          
          
      }
      public GameException(String message, Throwable throwable) {
          super(message, throwable);
-         logger.error(throwable);
+         logger.error(new RuntimeException(throwable.getMessage()));
          
      }
 	

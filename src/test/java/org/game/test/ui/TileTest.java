@@ -24,10 +24,10 @@ public class TileTest {
 
 		// Accept
 		ConsolePrinter printer = new ConsolePrinter();
-		doNothing().when(printer).printToConsole(Mockito.anyString());
+		doNothing().when(printer).printToConsole(Mockito.anyString(),Mockito.anyBoolean());
 
 		// Act
-		header.renderUI();
+		header.renderUI(false);
 
 		// Assert
 		Mockito.verify(printer, Mockito.times(1));
@@ -39,10 +39,10 @@ public class TileTest {
 
 		// Accept
 		ConsolePrinter printer = new ConsolePrinter();
-		doNothing().when(printer).printToConsole(Mockito.anyString());
+		doNothing().when(printer).printToConsole(Mockito.anyString(),Mockito.anyBoolean());
 
 		// Act
-		middleTile.renderUI();
+		middleTile.renderUI(false);
 
 		// Assert
 		Mockito.verify(printer, Mockito.times(1));

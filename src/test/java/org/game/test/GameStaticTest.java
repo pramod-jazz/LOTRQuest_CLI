@@ -14,7 +14,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class GameStaticTest {
 
 	private Game game;
-	
+
 	private GameMetadata gameMetadata;
 
 	@Before
@@ -22,7 +22,7 @@ public class GameStaticTest {
 		// Arrange
 		game = new Game();
 
-		 PowerMockito.mockStatic(GameMetadata.class);
+		PowerMockito.mockStatic(GameMetadata.class);
 
 	}
 
@@ -40,11 +40,9 @@ public class GameStaticTest {
 
 		// Assert
 
-		//verify(GameMetadata.class, "addCustomCharacter", captor.capture());
+		// verify(GameMetadata.class, "addCustomCharacter", captor.capture());
 		// PowerMockito.verifyStatic(GameMetadata.addCustomCharacter(anyString()));
 		PowerMockito.verifyStatic(GameMetadata.class);
-
-		
 
 	}
 

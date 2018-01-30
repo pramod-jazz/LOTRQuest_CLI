@@ -1,8 +1,16 @@
 package org.game.fantasy.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Character {
+public class Character implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8262717372960454445L;
+
+
 
 	public Character(Integer id, String characterAvatar, String characterName) {
 		super();
