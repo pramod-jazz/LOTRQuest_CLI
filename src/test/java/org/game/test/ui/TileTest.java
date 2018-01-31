@@ -1,6 +1,6 @@
 package org.game.test.ui;
 
-import org.game.fantasy.ui.ConsolePrinter;
+import org.game.fantasy.controls.ConsoleController;
 import org.game.fantasy.ui.Header;
 import org.game.fantasy.ui.MiddleTile;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class TileTest {
 	public void testHeaderPrinting() {
 
 		// Accept
-		ConsolePrinter printer = new ConsolePrinter();
+		ConsoleController printer = new ConsoleController();
 		doNothing().when(printer).printToConsole(Mockito.anyString(),Mockito.anyBoolean());
 
 		// Act
@@ -38,7 +38,7 @@ public class TileTest {
 	public void testMiddleTilePrinting() {
 
 		// Accept
-		ConsolePrinter printer = new ConsolePrinter();
+		ConsoleController printer = new ConsoleController();
 		doNothing().when(printer).printToConsole(Mockito.anyString(),Mockito.anyBoolean());
 
 		// Act

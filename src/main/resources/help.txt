@@ -1,0 +1,19 @@
+As this is command line game you need to type command to play this game.
+
+Game Commands are as follows :
+
+play - Play and save yourself by clicking mouse.
+
+help - To see this page again.
+
+profile - See your points, details, and current level.
+
+map - To see where are you on map of middle earth.
+
+quit - to quit game in between.`
+
+resume - to start game from first level.
+
+
+
+

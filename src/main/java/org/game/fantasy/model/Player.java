@@ -1,9 +1,48 @@
 package org.game.fantasy.model;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4406687381110224319L;
+
 	private Integer id;
 	
+	private String name;
+	
+	private String characterName;
+	
+	private Integer currentLevelSuccess = 0;
+	
+	public String getCharacterName() {
+		return characterName;
+	}
+
+	public void setCharacterName(String characterName) {
+		this.characterName = characterName;
+	}
+
+	private String passphrase;
+	
+	public String getPassphrase() {
+		return passphrase;
+	}
+
+	public void setPassphrase(String passphrase) {
+		this.passphrase = passphrase;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private Integer points;
 	
 	private Integer currentLevel;
@@ -41,6 +80,16 @@ public class Player {
 	public void setCharacter(Integer character) {
 		this.character = character;
 	}
+
+	public Integer getCurrentLevelSuccess() {
+		return currentLevelSuccess;
+	}
+
+	public void setCurrentLevelSuccess(Integer currentLevelSuccess) {
+		this.currentLevelSuccess = currentLevelSuccess;
+	}
+	
+	
 	
 	
 	

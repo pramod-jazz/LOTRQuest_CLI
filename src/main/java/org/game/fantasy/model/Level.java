@@ -29,4 +29,12 @@ public class Level implements Serializable {
 		this.levelName = lavelName;
 	}
 
+	public Level(Integer id, String levelName) {
+		super();
+		this.id = id;
+		this.levelName = levelName;
+	}
+	
+	
+
 }

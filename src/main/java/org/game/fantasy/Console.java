@@ -2,188 +2,328 @@ package org.game.fantasy;
 
 import java.io.IOException;
 
-public class Console {
-	
+import org.game.fantasy.exceptions.GameException;
 
-	public static final int ROWS = 100;
-	public static final int COLS = 100;
-
-	private static char[][] screen;
-	private static int cursorRow = 0;
-	private static int cursorCol = 0;
-	
-	public Console ()
-	{
-		screen = new char[ROWS][COLS];
-		initScreen();
+/**
+ * Console.java
+ * 
+ * This class is a convinence wrapper for the common task of
+ * asking for user input. Features include:
+ *      - recusive input validation for all primitive types
+ *      - overloaded methods for lazy usage or informative prompting
+ *	 - consistant, meaningful prompting behaviour
+ *
+ *      
+ * 
+ *  Some usages: 
+ *      - int i1 = Console.readInteger("Enter a number: ");
+ *      - int i2 = Console.readInteger("Enter a number: ", "Try again.");
+ *      - int i3 = Console.readInteger("Enter a number between 1 and 10", "Not in range.", 1, 10);
+ *      - float f = Console.readFloat("Enter a decimal number: ");
+ *      - if (Console.readYesNo("Really Quit [y/n]")) { System.exit(0); }
+ *      
+ * 
+ * @author Christopher Lowe 
+ * @version 5/4/2011
+ * 
+ */
+public class Console
+{
+ 
+	private static final String CONSOLE = "> ";
+	private static final String DEFAULT_PROMPT = "Enter input: ";
+	private static final String DEFAULT_RETRY = "Invalid Input. Try again.";
+ 
+ 
+	/**
+	 * Prompts the user for a YES/NO input. It will default to false on incorrect input.
+	 *
+	 * @param prompt The message asking for user input
+	 * @return true if the user inputs "Y", "y", "yes", "YES" or "YeS"
+	 */
+	public static final boolean readYesNo(String prompt) {
+		String input = readLine(prompt).toLowerCase().trim();
+		if (input.equals("yes") || input.equals("y")) {
+			return true;
+		}
+		//Behavioural: only a discrete 'yes' will return true.
+		//It does not recurse on invalid input because incorrect input
+		//is logically identical to the non-destructive 'no'
+		return false;
 	}
-	
-	public void initScreen()
-	{
-		for (int row=0; row<ROWS; row++)
-			for (int col=0; col<COLS; col++)
-				screen[row][col] = ' ';
-		cursorRow = 0;
-		cursorCol = 0;
+ 
+	/**
+	 * Prompts the user for YES/NO input. It will default to false on incorrect input.
+	 *
+	 * @return true if the user inputs "Y", "y", "yes", "YES" or "YeS"
+	 */
+	public static final boolean readYesNo() {
+		return readYesNo(DEFAULT_PROMPT);
 	}
-	
-	public void printScreen ()
-	{
-		String line = "";
-		for (int row = 0; row < ROWS; row++) {
-			for (int col=0; col<COLS; col++) {
-				line += screen[row][col];
+ 
+	/**
+	 * Prompts the user for YES/NO input. It will default to false on incorrect input.
+	 *
+	 * @param prompt The message asking for user input
+	 * @return true if the user inputs "Y", "y", "yes", "YES" or "YeS"
+	 */
+	public static final boolean readBoolean(String prompt) {
+		return readYesNo(prompt);
+	}
+ 
+	/**
+	 * Prompts the user for YES/NO input. It will default to false on incorrect input.
+	 *
+	 * @return true if the user inputs "Y", "y", "yes", "YES" or "YeS"
+	 */	 
+	public static final boolean readBoolean() {
+		return readYesNo(DEFAULT_PROMPT);
+	}
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input in a given range.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @param error The error message to inform the user that the input was invalid.
+	 * @param min The minimum valid input
+	 * @param max The maximum valid input
+	 * @return An integer in the range min..max
+	 */
+	public static final int readInteger(String prompt, String error, int min, int max) {
+		if (min >= max) {
+			return 0;   //Should not happen, but can if the client programmer is not paying attention
+		}
+ 
+		try {
+			int i = Integer.valueOf((readLine(prompt)));
+			if ((i < min) || (i > max)) {
+				System.out.println(error);
+				return readInteger(prompt, error, min, max);
 			}
-		}
-		System.out.println(line);
-	}
-	
-	public void clearScreen ()
-	{
-		initScreen();
-		for (int i=0;i<25;i++) System.out.println();
-	}
-	
-	
-	public void putCharAt(char c, int row, int col)
-	{
-		if (row < 0 || row > (ROWS-1)) return;
-		if (col < 0 || col > (COLS-1)) return;
-		screen[row][col] = c;
-		// reset cursor
-		cursorCol = ++col;
-		cursorRow = row;
-		if (cursorCol == COLS) {
-			cursorCol = 0;
-			cursorRow++;
-			if (cursorRow == ROWS) cursorRow = 0;
+			return i;
+		} catch (NumberFormatException e) {
+			System.out.println(error);
+			return readInteger(prompt, error, min, max);
 		}
 	}
-
-	public void putChar(char c)
-	{
-		screen[cursorRow][cursorCol++] = c;
-		if (cursorCol == COLS) {
-			cursorCol = 0;
-			cursorRow++;
-			if (cursorRow == ROWS) cursorRow = 0;
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input in a given range.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @param min The minimum valid input.
+	 * @param max The maximum valid input.
+	 * @return An integer in the range min..max
+	 */
+	public static final int readInteger(String prompt, int min, int max) {
+		return readInteger(prompt, DEFAULT_RETRY, min, max);
+	}
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input in a given range.
+	 *
+	 * @param min The minimum valid input.
+	 * @param max The maximum valid input.
+	 * @return An integer in the range min..max
+	 */
+	public static final int readInteger(int min, int max) {
+		return readInteger(DEFAULT_PROMPT, DEFAULT_RETRY, min, max);
+	}
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @param error The error message to inform the user that the input was invalid.
+	 * @return An integer
+	 */
+	public static final int readInteger(String prompt, String error) {
+		try {
+			return Integer.valueOf((readLine(prompt)));
+		} catch (NumberFormatException e) {
+			new GameException(error);
+			//System.out.println("\n" + error);
+			return readInteger(prompt, error); 
 		}
 	}
-	
-	public void putStringAt(String s, int row, int col)
-	{
-		for (int i=0; i<s.length(); i++)
-			putCharAt(s.charAt(i), row, col++);
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @return An integer
+	 */
+	public static final int readInteger(String prompt) {
+		return readInteger(prompt, DEFAULT_RETRY);
 	}
-	
-	
-
-
-/**
-Sets the screen cursor to locations indicated by <i>x</i> and <i>y</i> parameters.
-The <i>x</i> parameter is the column number; the <i>y</i> parameter is the
-row number.  Note that the order of these parameters is reversed from the
-other screen method calls that specify row first.  This is due to historical
-reasons, the gotoXY function is used by a number of different systems and
-is provided here for consistancy.  If the x or y parameters are outside
-the range of row and column values (0 to 24 and 0 to 79 respectively)
-the method does not change the screen cursor position.  Subsequent
-calls to put*() methods will not result in correct placement of the char
-or string arguments.
-*/
-	public void gotoXY (int x, int y)
-	{
-		if (x < 0 || x > (COLS-1)) return;
-		if (y < 0 || y > (ROWS-1)) return;
-		cursorRow = y;
-		cursorCol = x;
+ 
+ 
+	/**
+	 * Prompts the user for an Integer input.
+	 *
+	 * @return An integer
+	 */
+	public static final int readInteger() {
+		return readInteger(DEFAULT_PROMPT, DEFAULT_RETRY);
 	}
-
-	//public char getCharAt(int row, int col)
-
-/**
-Prints a prompt message to the console input row (row 25).  To print a
-prompt message to some other portion of the screen you will need to
-use the putString or putStringAt methods.
-*/
-   public static void printPrompt(String prompt)
-   {  System.out.print(prompt + " ");
-      System.out.flush();
-   }
-
-/**
-Reads a string input from the console input row (row 25) typed by the
-user.  This version does not print a preceding prompt message.
-*/
-   public static String readLine()
-   {  int ch;
-      String line = "";
-      boolean done = false;
-      while (!done)
-      {  try
-         {  ch = System.in.read();
-            if (ch < 0 || (char)ch == '\n')
-               done = true;
-            else if ((char)ch != '\r')
-               line = line + (char) ch;
-         }
-         catch(IOException e)
-         {  done = true;
-         }
-      }
-      return line;
-   }
-
-/**
-Similar to readLine() but prints a prompt message on the input row (row 25)
-prior to waiting for user input.
-*/
-   public static String readLine(String prompt)
-   {  printPrompt(prompt);
-      return readLine();
-   }
-
-/**
-Reads an integer value input on the input row (row 25).  If anything
-other than an integer is entered, the method notifies the user of the
-error and waits for an integer to be entered.
-*/
-   public static int readInt(String prompt)
-   {  while(true)
-      {  printPrompt(prompt);
-         try
-         {  return Integer.valueOf
-               (readLine().trim()).intValue();
-         } catch(NumberFormatException e)
-         {  System.out.println
-               ("Not an integer. Please try again!");
-         }
-      }
-   }
-
-/**
-Reads a double value input on the input row (row 25).  If anything
-other than a double or an integer is entered, the method notifies the
-user of the error and waits for a number to be entered.
-*/
-   public static double readDouble(String prompt)
-   {  while(true)
-      {  printPrompt(prompt);
-         try
-         {  return Double.parseDouble(readLine().trim());
-         } catch(NumberFormatException e)
-         {  System.out.println
-         ("Not a floating point number. Please try again!");
-         }
-      }
-   }
-   
-   public void putString(String s)
-	{
-		putStringAt(s,cursorRow, cursorCol);
+ 
+ 
+	/**
+	 * Prompts the user for a Double input.
+	 * 
+	 * @param prompt The message asking for user input.
+	 * @param error The message to inform the user about invalid input.
+	 * @return A double
+	 */
+	public static final double readDouble(String prompt, String error) {
+		try {
+			return Double.valueOf((readLine(prompt)));
+		} catch (NumberFormatException e) {
+			System.out.println("\n" + error);
+			return readDouble(prompt, error);
+		}
 	}
-	
-	
-
-
+ 
+	/**
+	 * Prompts the user for a Double input.
+	 * 
+	 * @param prompt The message asking for user input.
+	 * @return A double
+	 */
+	public static final double readDouble(String prompt) {
+		return readDouble(prompt, DEFAULT_RETRY);
+	}
+ 
+	/**
+	 * Prompts the user for a Double input.
+	 * 
+	 * @return A double
+	 */
+	 public static final double readDouble() {
+		return readDouble(DEFAULT_PROMPT, DEFAULT_RETRY);
+	 }
+ 
+ 
+	/**
+	 * Prompts the user for a Float input.
+	 *
+	 * @param prompt The message asking for input.
+	 * @param error The message informing the user that the input was invalid.
+	 * @return A float
+	 */
+	public static final float readFloat(String prompt, String error) {
+		try {
+			return Float.valueOf((readLine(prompt)));
+		} catch (NumberFormatException e) {
+			System.out.println("\n" + error);
+			return readFloat(prompt, error);
+		}
+	}
+ 
+ 
+	/**
+	 * Prompts the user for a Float input.
+	 *
+	 * @param prompt The message asking for input.
+	 * @return A float
+	 */
+	public static final float readFloat(String prompt) {
+		return readFloat(prompt, DEFAULT_RETRY);
+	}
+ 
+ 
+	/**
+	 * Prompts the user for a Float input.
+	 *
+	 * @return A float
+	 */
+	public static final float readFloat() {
+		return readFloat(DEFAULT_PROMPT, DEFAULT_RETRY);
+	}
+ 
+	/**
+	 * Prompts the user for a String input at least minLength in size.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @param error The message informing the user about invalid input
+	 * @param minLength The minimum length of the string that is valid
+	 * @return A string minLength or greater in length
+	 */
+	public static final String readString(String prompt, String error, int minLength) {
+		String input = readLine(prompt);
+		if (input.length() < minLength) {
+			System.out.println("\n" + error);
+			return readString(prompt, error, minLength);
+		}
+ 
+		return input;
+	}
+ 
+ 
+	/**
+	 * Prompts the user for a String input. It will prompt again if the user does not enter anything
+	 *
+	 * @param prompt The message asking for user input.
+	 * @param error The message informing the user of invalid input
+	 * @return A String
+	 */
+	public static final String readString(String prompt, String error) {
+		String input = readLine(prompt);
+		if ((input.length() == 0) || (input == null) || (input.equals("\n"))) {
+			System.out.println("\n" + error);
+		}
+ 
+		return input;		
+	}
+ 
+ 
+	/**
+	 * Prompts the user for a String input.
+	 *
+	 * @param prompt The message asking for user input.
+	 * @return A String
+	 */
+	public static final String readString(String prompt) {		
+		return readString(prompt, DEFAULT_RETRY);
+	}
+ 
+ 
+	/**
+	 * Prompts the user for a String input.
+	 *
+	 * @return A String
+	 */
+	public static final String readString() {
+		return readString(DEFAULT_PROMPT, DEFAULT_RETRY);
+	}
+ 
+ 
+ 
+	/**
+	 *  Working method, used by every single method in this class.
+	 *  It uses the low level System.in.read() to build a StringBuffer containing
+	 *  the users input and traps the user in an loop until ENTER is pressed.
+	 *  In windows, the ENTER button returns /r/n which is dealt with in the loop.
+	 */
+	private static final String readLine(String prompt) {
+		System.out.print(prompt);
+		System.out.print("\n");
+		System.out.print(CONSOLE);
+ 
+		StringBuffer b = new StringBuffer();
+		while(true) {
+			try {
+				char c = (char) System.in.read();
+				b.append(c);
+				if (c == '\n') {
+					return b.toString().trim();    //Enter pressed
+				} else if (c == '\r') { }   //Windows carriage return \r is followed by \n so we ignore it and pick it up on the next loop
+			} catch (IOException e) { }     //Unsure what would cause this and what to do about it
+		}
+	}
 }
