@@ -1,7 +1,5 @@
 package org.game.fantasy.command;
 
-import java.io.File;
-
 import org.game.fantasy.command.params.ContinueCommandParams;
 import org.game.fantasy.command.params.HelpCommandParams;
 import org.game.fantasy.command.params.MapCommandParams;
@@ -14,8 +12,7 @@ import org.game.fantasy.command.params.ResumeCommandParams;
 * class or classes.
 */
 public class Command<ParamType, ReturnType> {
-    public static final Command<ChooseFileCommandParams, File> CHOOSE_FILE = new Command<ChooseFileCommandParams, File>(
-            "Choose File");
+   
     public static final Command<HelpCommandParams, String> HELP = new Command<HelpCommandParams,  String>(
             "This Command is showing you help!");
 
