@@ -1,10 +1,12 @@
 package org.game.fantasy.ui;
 
+import org.game.fantasy.controls.ConsoleController;
+
 public class MiddleTile implements DisplayUnit {
 
     String tileName;
     
-    ConsolePrinter printer = new ConsolePrinter();
+    ConsoleController printer = new ConsoleController();
 
 
     public MiddleTile(String tileName) {
