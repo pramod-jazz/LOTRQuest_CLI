@@ -18,9 +18,9 @@ import junit.framework.Assert;
 @PrepareForTest({ ObjectIOOperations.class })
 public class ObjectIOIntegrationTest {
 
-	org.game.fantasy.model.Character dummy;
-	org.game.fantasy.model.Character dummy2;
-	List<org.game.fantasy.model.Character> dummyCharacters;
+	org.game.fantasy.model.GameCharacter dummy;
+	org.game.fantasy.model.GameCharacter dummy2;
+	List<org.game.fantasy.model.GameCharacter> dummyCharacters;
 
 	ObjectIOOperations objectIO = new ObjectIOOperations();
 
@@ -28,14 +28,14 @@ public class ObjectIOIntegrationTest {
 	public void testSaveObject() {
 
 		// Arrange
-		dummy = Mockito.mock(org.game.fantasy.model.Character.class, Mockito.withSettings().serializable());
+		dummy = Mockito.mock(org.game.fantasy.model.GameCharacter.class, Mockito.withSettings().serializable());
 
 		try {
 
 			// Act
 			objectIO.serialize(dummy, "dummy.ser");
 
-			org.game.fantasy.model.Character result = (org.game.fantasy.model.Character) objectIO
+			org.game.fantasy.model.GameCharacter result = (org.game.fantasy.model.GameCharacter) objectIO
 					.deserialize("dummy.ser");
 
 			// Assert
@@ -59,16 +59,16 @@ public class ObjectIOIntegrationTest {
 
 		// Arrange
 		dummyCharacters = new ArrayList<>();
-		dummy = Mockito.mock(org.game.fantasy.model.Character.class, Mockito.withSettings().serializable());
+		dummy = Mockito.mock(org.game.fantasy.model.GameCharacter.class, Mockito.withSettings().serializable());
 		dummy.setCharacterName("lorem");
-		dummy2 = Mockito.mock(org.game.fantasy.model.Character.class, Mockito.withSettings().serializable());
+		dummy2 = Mockito.mock(org.game.fantasy.model.GameCharacter.class, Mockito.withSettings().serializable());
 		dummy2.setCharacterName("ipsum");
 
 		try {
 			// Act
 			objectIO.serialize(dummyCharacters, "dummyCharacters.ser");
 
-			List<org.game.fantasy.model.Character> results = (List<org.game.fantasy.model.Character>) objectIO
+			List<org.game.fantasy.model.GameCharacter> results = (List<org.game.fantasy.model.GameCharacter>) objectIO
 					.deserialize("dummyCharacters.ser");
 
 			// Assert
