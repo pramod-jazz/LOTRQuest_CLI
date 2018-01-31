@@ -1,8 +1,25 @@
 package org.game.fantasy.model;
 
-public class GameDetails {
+import java.io.Serializable;
+
+public class GameDetails implements Serializable    {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5177633036159010101L;
 
 	private Integer playerId;
+	
+	private String loggedInUserName;
+
+	public String getLoggedInUserName() {
+		return loggedInUserName;
+	}
+
+	public void setLoggedInUserName(String loggedInUserName) {
+		this.loggedInUserName = loggedInUserName;
+	}
 
 	private Integer currentLevel;
 
@@ -19,6 +36,13 @@ public class GameDetails {
 	}
 
 	public void setCurrentLevel(Integer currentLevel) {
+		this.currentLevel = currentLevel;
+	}
+
+	public GameDetails(Integer playerId, String loggedInUserName, Integer currentLevel) {
+		super();
+		this.playerId = playerId;
+		this.loggedInUserName = loggedInUserName;
 		this.currentLevel = currentLevel;
 	}
 

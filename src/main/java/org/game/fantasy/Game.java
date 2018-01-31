@@ -1,16 +1,10 @@
 package org.game.fantasy;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
-import org.game.fantasy.model.CharacterAvatar;
-import org.game.fantasy.ui.DisplayUnit;
-import org.game.fantasy.ui.Header;
-import org.game.fantasy.ui.MiddleTile;
-import org.game.fantasy.utils.Delay;
+import org.apache.log4j.Logger;
+import org.game.fantasy.controls.GameController;
+import org.game.fantasy.exceptions.GameException;
 
 /**
  * Hello world!
@@ -18,11 +12,46 @@ import org.game.fantasy.utils.Delay;
  */
 public class Game {
 	
+	final static Logger logger = Logger.getLogger(Game.class);
+	
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
+		logger.info("Starting Game.");
 		
-		System.out.println("Hello World 3 !");
+
+		
+		
+		GameController gameController = new GameController();
+		gameController.initialisePlayer();
+		gameController.showGreetings();
+		
+		gameController.showCharacters();
+		gameController.setCharacterChoice();
+		gameController.showChoicedCharacter();
+		
+		gameController.addDelayAndGap(5);		
+		
+		gameController.introduceLevel(1);
+		
+		gameController.readCommand();
+		
+		
+		
+		
+		
+		
+	/*	try {
+			gameController.help();
+			gameController.continueGame1();
+			gameController.resume();
+			gameController.quit();
+			gameController.map();
+		} catch (Exception e) {
+			new GameException("Fatal Exception Occured", e);
+		}*/
+		
+		/*System.out.println("Hello World 3 !");
 		showGreetings();
 		
 		GameMetadata.setupCharacters();
@@ -70,7 +99,7 @@ public class Game {
 		        System.out.print("=>");
 		        TimeUnit.MILLISECONDS.sleep(20);
 
-		        // Something that allows user input/interaction capable to stop the progressbar
+		        // Something that allows user input/interaction capable to stop the progress bar
 		        try {
 		            if (bufferedReader.ready()) {
 		            	isInturrupted = true;
@@ -88,7 +117,7 @@ public class Game {
 		    	System.out.println("You got 10 Points !!");	
 		    }else {
 		    	System.out.println("ohh you died!!!");
-		    }
+		    }*/
 		    
 		
 		
@@ -101,14 +130,6 @@ public class Game {
 	
 	
 
-	private static void showGreetings() {
-		DisplayUnit header = new Header();
-		header.renderUI(false);
-
-		new Delay(2).delayExecution();
-
-		DisplayUnit gandalfImage = new MiddleTile("gandalf.txt");
-		gandalfImage.renderUI(false);
-	}
+	
 
 }
