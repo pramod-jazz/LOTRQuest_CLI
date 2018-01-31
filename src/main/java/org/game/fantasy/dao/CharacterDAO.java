@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.game.fantasy.model.GameCharacter;
 
 public class CharacterDAO {
 
@@ -13,25 +14,25 @@ public class CharacterDAO {
 	ObjectIOOperations objectIO = new ObjectIOOperations();
 
 	@SuppressWarnings("unchecked")
-	public List<Character> findAll() throws ClassNotFoundException, IOException {
+	public List<GameCharacter> findAll() throws ClassNotFoundException, IOException {
 
-		List<Character> Characters = new ArrayList<>();
-		Characters.addAll((List<Character>) objectIO.deserialize("characters.ser"));
+		List<GameCharacter> gameCharacters = new ArrayList<>();
+		gameCharacters.addAll((List<GameCharacter>) objectIO.deserialize("gameCharacters.ser"));
 
-		return Characters;
+		return gameCharacters;
 	}
 
-	public void save(Character Character) throws IOException, ClassNotFoundException {
+	public void save(GameCharacter gameCharacter) throws IOException, ClassNotFoundException {
 
-		List<Character> Characters = findAll();
-		Characters.add(Character);
+		List<GameCharacter> gameCharacters = findAll();
+		gameCharacters.add(gameCharacter);
 
-		saveAll(Characters);
+		saveAll(gameCharacters);
 	}
 
-	public void saveAll(List<Character> Characters) throws IOException {
+	public void saveAll(List<GameCharacter> gameCharacters) throws IOException {
 
-		objectIO.serialize(Characters, "characters.ser");
+		objectIO.serialize(gameCharacters, "gameCharacters.ser");
 	}
 
 }

@@ -1,8 +1,5 @@
 package org.game.fantasy.dao;
 
-
-
-
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
@@ -27,25 +24,20 @@ public class LevelDAOTest {
 	private LevelDAO subject;
 
 	private Level level;
-	
-	
+
 	private List<Level> levels;
 	@Mock
-    private	ObjectIOOperations objectIO = new ObjectIOOperations();
-	
+	private ObjectIOOperations objectIO = new ObjectIOOperations();
+
 	@Before
 	public void setUp() throws Exception {
 
-		levels = new ArrayList<>();
 		// Arrange
-		level = new Level();
-		level.setId(0);
-		level.setLavelName("Mordor");
+		levels = new ArrayList<>();
+		level = new Level(0, "Mordor");
+
 		levels.add(level);
-		
-		
-		
-		
+
 	}
 
 	@Test
@@ -53,14 +45,12 @@ public class LevelDAOTest {
 
 		// Arrange
 		doNothing().when(objectIO).serialize(anyObject(), anyString());
-		
-		//Act
+
+		// Act
 		subject.saveAll(levels);
-		
-		//Assert
-		verify(objectIO,times(1)).serialize(levels, "test");
-		
-		
-		
-	}	
+
+		// Assert
+		verify(objectIO, times(1)).serialize(levels, "test");
+
+	}
 }

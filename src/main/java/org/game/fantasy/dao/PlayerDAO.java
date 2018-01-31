@@ -9,16 +9,16 @@ public class PlayerDAO {
 	ObjectIOOperations objectIO = new ObjectIOOperations();
 
 	@SuppressWarnings("unchecked")
-	public Player getDetails() throws ClassNotFoundException, IOException {
+	public Player getDetails( String playerName) throws ClassNotFoundException, IOException {
 
 		Player player = new Player();
-		player = (Player) objectIO.deserialize("player.ser");
+		player = (Player) objectIO.deserialize( playerName +  ".ser");
 
 		return player;
 	}
 
 	public void save(Player player) throws IOException {
-		objectIO.serialize(player, "player.ser");
+		objectIO.serialize(player,  player.getName() + ".ser");
 	}
 
 }
