@@ -73,7 +73,7 @@ public class GameMetadata {
 		try {
 			levelDAO.saveAll(levels);
 		} catch (IOException e) {
-			new GameException("IO Exception occured!", e);
+			throw new GameException("IO Exception occured!", e);
 		}
 		
 		totalLevels = levels.size();

@@ -6,14 +6,23 @@ import java.io.InputStreamReader;
 import java.util.Optional;
 import java.util.Scanner;
 
-import org.game.fantasy.Console;
+import org.apache.log4j.Logger;
+import org.game.fantasy.Game;
 import org.game.fantasy.exceptions.GameException;
 import org.game.fantasy.ui.Header;
 
 public class ConsoleController {
+	
+	final static Logger logger = Logger.getLogger(Game.class);
 
 	static Scanner scanner = new Scanner(System.in);
 
+	/**
+	 * Prints the to console.
+	 *
+	 * @param filePath the file path
+	 * @param isSameLine the is same line
+	 */
 	public void printToConsole(String filePath, boolean isSameLine) {
 		try (BufferedReader reader = new BufferedReader(
 				new InputStreamReader(Header.class.getClassLoader().getResourceAsStream(filePath)))) {
@@ -34,7 +43,7 @@ public class ConsoleController {
 	public Optional<Integer> askIntegerInput(String message) {
 		Optional<Integer> optionalInput = Optional.empty();
 
-		optionalInput = Optional.ofNullable(Console.readInteger(message, "Please Enter valid number"));
+		optionalInput = Optional.ofNullable(ConsoleController.readInteger(message, "Please Enter valid number"));
 
 		return optionalInput;
 
@@ -57,7 +66,7 @@ public class ConsoleController {
 		try {
 			optionalInput = Optional.ofNullable((String) scanner.nextLine());
 		} catch (Exception e) {
-			new GameException("Please enter valid input.");
+			throw new GameException("Please enter valid input.");
 		}
 		return optionalInput;
 
@@ -216,9 +225,10 @@ public class ConsoleController {
 		try {
 			return Integer.valueOf((readLine(prompt)));
 		} catch (NumberFormatException e) {
-			new GameException(error);
+			logger.error("Wrong input by user! ");
 			// System.out.println("\n" + error);
 			return readInteger(prompt, error);
+			
 		}
 	}
 

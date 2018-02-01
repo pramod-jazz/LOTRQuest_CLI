@@ -127,9 +127,9 @@ public class GameController extends GameControlBase {
             }
 
         } catch (final ClassNotFoundException e) {
-            new GameException("Class not found exception Occured.", e);
+           throw new GameException("Class not found exception Occured.", e);
         } catch (final IOException e) {
-            new GameException("Serialization file IO exception Occured. Check the proper file location.", e);
+            throw new GameException("Serialization file IO exception Occured. Check the proper file location.", e);
         }
 
         // Stream.of(CharacterAvatar.values()).map(String::toLowerCase).collect(Collectors.toList()).forEach(System.out::println);
@@ -163,7 +163,7 @@ public class GameController extends GameControlBase {
         try {
             existingPlayer = Optional.ofNullable(playerDAO.getDetails(name));
         } catch (ClassNotFoundException | IOException e) {
-            new GameException("Fatal Exception", e);
+          throw  new GameException("Fatal Exception", e);
         }
         if (existingPlayer.isPresent()) {
 
@@ -174,8 +174,7 @@ public class GameController extends GameControlBase {
 
                 gameDetailsDAO.save(gameDetails);
             } catch (final IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                throw new GameException("Fatal error occured!", e);
             }
             return true;
 
@@ -203,8 +202,7 @@ public class GameController extends GameControlBase {
                 try {
                     profile(player);
                 } catch (final Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                	throw new GameException("Fatal error occured!", e);
                 }
             } catch (final IOException e) {
 
@@ -257,8 +255,7 @@ public class GameController extends GameControlBase {
         try {
             profile(player);
         } catch (final Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	throw new GameException("Fatal error occured!", e);
         }
         ConsoleController.printGap();
     }
@@ -270,7 +267,7 @@ public class GameController extends GameControlBase {
             gameDetails = gameDetailsDAO.getDetails().get();
             player = playerDAO.getDetails(gameDetails.getLoggedInUserName());
         } catch (ClassNotFoundException | IOException e1) {
-            new GameException("FatalException", e1);
+        	throw new GameException("Fatal error occured!", e1);
         }
 
         if (!player.getIsChoiceSet()) {
@@ -378,7 +375,7 @@ public class GameController extends GameControlBase {
                 try {
                     continueGame1();
                 } catch (final Exception e) {
-                    new GameException("Error while playing game ", e);
+                  throw  new GameException("Error while playing game ", e);
                 }
 
                 break;
@@ -386,7 +383,7 @@ public class GameController extends GameControlBase {
                 try {
                     help();
                 } catch (final Exception e) {
-                    new GameException("Error while playing game ", e);
+                   throw new GameException("Error while playing game ", e);
                 }
                 break;
 
@@ -395,7 +392,7 @@ public class GameController extends GameControlBase {
                 try {
                     quit();
                 } catch (final Exception e) {
-                    new GameException("Error while playing game ", e);
+                   throw new GameException("Error while playing game ", e);
                 }
 
                 break;
@@ -404,7 +401,7 @@ public class GameController extends GameControlBase {
                 try {
                     profile(player);
                 } catch (final Exception e) {
-                    new GameException("Error while playing game ", e);
+                	throw new GameException("Error while playing game ", e);
                 }
 
                 break;
@@ -413,13 +410,13 @@ public class GameController extends GameControlBase {
                 try {
                     map(player);
                 } catch (final Exception e) {
-                    new GameException("Error while playing game ", e);
+                	throw new GameException("Error while playing game ", e);
                 }
 
                 break;
 
             default:
-                new GameException("I dont understand your command hobbit. Please retry: ");
+            	new GameException("I dont understand your command hobbit. Please retry: ");
                 break;
         }
 
