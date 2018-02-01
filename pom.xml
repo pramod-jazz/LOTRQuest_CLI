@@ -33,10 +33,10 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.5</version>
-		
+
 		</dependency>
-		
-		
+
+
 
 
 		<dependency>
@@ -97,5 +97,124 @@
 
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>QA</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<delete
+											file="${project.build.outputDirectory}/application.properties" />
+										<copy
+											file="src/main/resources/QA_properties/application.properties"
+											tofile="${project.build.outputDirectory}/application.properties" />
+
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>DEV</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<delete
+											file="${project.build.outputDirectory}/application.properties" />
+										<copy file="src/main/resources/DEV/application.properties"
+											tofile="${project.build.outputDirectory}/application.properties" />
+
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>PROD</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<delete
+											file="${project.build.outputDirectory}/application.properties" />
+										<copy file="src/main/resources/PROD/application.properties"
+											tofile="${project.build.outputDirectory}/application.properties" />
+
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>LOCAL</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<delete
+											file="${project.build.outputDirectory}/application.properties" />
+										<copy file="src/main/resources/LOCAL/application.properties"
+											tofile="${project.build.outputDirectory}/application.properties" />
+
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+
+	</profiles>
+
+
 
 </project>
