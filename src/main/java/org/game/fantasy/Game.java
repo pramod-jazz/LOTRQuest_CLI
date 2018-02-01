@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.game.fantasy.controls.GameController;
-import org.game.fantasy.exceptions.GameException;
 
 /**
  * Hello world!
@@ -16,19 +15,21 @@ public class Game {
 	
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		
+			
 		logger.info("Starting Game.");
 		
 
 		
 		
 		GameController gameController = new GameController();
-		gameController.initialisePlayer();
 		gameController.showGreetings();
 		
-		gameController.showCharacters();
+		gameController.initialisePlayer();
+		
+		
+		//gameController.showCharacters();
 		gameController.setCharacterChoice();
-		gameController.showChoicedCharacter();
+		//gameController.showChoicedCharacter();
 		
 		gameController.addDelayAndGap(5);		
 		

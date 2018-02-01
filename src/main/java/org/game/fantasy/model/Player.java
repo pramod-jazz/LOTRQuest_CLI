@@ -11,6 +11,10 @@ public class Player implements Serializable {
 
 	private Integer id;
 	
+	private Boolean isNew = true;
+	
+	private Boolean isChoiceSet = false;
+	
 	private String name;
 	
 	private String characterName;
@@ -88,6 +92,26 @@ public class Player implements Serializable {
 	public void setCurrentLevelSuccess(Integer currentLevelSuccess) {
 		this.currentLevelSuccess = currentLevelSuccess;
 	}
+
+	public Boolean getIsNew() {
+		return isNew;
+	}
+
+	public void setIsNew(Boolean isNew) {
+		this.isNew = isNew;
+	}
+
+	public Boolean getIsChoiceSet() {
+		return isChoiceSet;
+	}
+
+	public void setIsChoiceSet(Boolean isChoiceSet) {
+		this.isChoiceSet = isChoiceSet;
+	}
+	
+	
+	
+	
 	
 	
 	

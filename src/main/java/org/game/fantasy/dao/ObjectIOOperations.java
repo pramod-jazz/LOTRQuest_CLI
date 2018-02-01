@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class ObjectIOOperations {
-	
+
 	public void serialize(Object object, String name) throws IOException {
 
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(name));
@@ -17,10 +17,8 @@ public class ObjectIOOperations {
 		objectOutputStream.close();
 
 	}
-	
-	
-	public Object deserialize(String filename) throws IOException, ClassNotFoundException {
 
+	public Object deserialize(String filename) throws IOException, ClassNotFoundException {
 
 		Object object = null;
 		try {
@@ -39,7 +37,8 @@ public class ObjectIOOperations {
 	}
 
 	private Object readFromClasspathResource(String filename) throws IOException, ClassNotFoundException {
-		try (ObjectInputStream stream = new ObjectInputStream(ObjectIOOperations.class.getClassLoader().getResourceAsStream(filename))) {
+		try (ObjectInputStream stream = new ObjectInputStream(
+				ObjectIOOperations.class.getClassLoader().getResourceAsStream(filename))) {
 			return stream.readObject();
 		}
 	}
