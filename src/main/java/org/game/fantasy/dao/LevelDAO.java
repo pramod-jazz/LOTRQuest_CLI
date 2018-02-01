@@ -19,8 +19,15 @@ public class LevelDAO {
 		return levels;
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param level the level
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public void save(Level level) throws IOException, ClassNotFoundException {
-		
+
 		List<Level> levels = findAll();
 		levels.add(level);
 

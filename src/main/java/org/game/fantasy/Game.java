@@ -21,19 +21,18 @@ public class Game {
 	 *             Signals that an I/O exception has occurred.
 	 * @throws InterruptedException
 	 *             the interrupted exception
-	 *             
-	 *            
+	 * 
+	 * 
 	 */
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		logger.info("Starting Game...");
-		
-		
+
 		/*
-		  Game Controller is a one entry point or Facade for all external interactions.
-		 
-		*/
-		
+		 * Game Controller is a one entry point or Facade for all external interactions.
+		 * 
+		 */
+
 		GameController gameController = new GameController();
 
 		gameController.showGreetings();

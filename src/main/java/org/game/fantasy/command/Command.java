@@ -7,43 +7,52 @@ import org.game.fantasy.command.params.ProfileCommandParams;
 import org.game.fantasy.command.params.QuitCommandParams;
 import org.game.fantasy.command.params.ResumeCommandParams;
 
-/** the command class defines the interface for a command and has the available commands listed out in my 
-* implementation.  The important thing is the interface itself but the Command constants can be located in any 
-* class or classes.
-*/
+/**
+ * The Class Command.
+ *
+ * @param <ParamType>
+ *            the generic type
+ * @param <ReturnType>
+ *            the generic type
+ */
 public class Command<ParamType, ReturnType> {
-   
-    public static final Command<HelpCommandParams, String> HELP = new Command<HelpCommandParams,  String>(
-            "This Command is showing you help!");
 
-    public static final Command<MapCommandParams, String> MAP = new Command<MapCommandParams,  String>(
-            "This Command is showing you Map!");
-    
-    public static final Command<ProfileCommandParams, String> PROFILE = new Command<ProfileCommandParams,  String>(
-            "This Command is showing you Profile!");
-    
-    public static final Command<ResumeCommandParams, String> RESUME = new Command<ResumeCommandParams,  String>(
-            "This Command is showing you Resume!");
-    
-    public static final Command<QuitCommandParams, String> QUIT = new Command<QuitCommandParams,  String>(
-            "This Command is showing you Quit!");
-    
-    public static final Command<ContinueCommandParams, String> CONTINUE = new Command<ContinueCommandParams,  String>(
-            "This Command is showing you Continue!");
+	public static final Command<HelpCommandParams, String> HELP = new Command<HelpCommandParams, String>(
+			"HELP");
 
+	public static final Command<MapCommandParams, String> MAP = new Command<MapCommandParams, String>(
+			"MAP");
 
-    
-    
-   /* public static final Command<AnotherCommandParams, String> ANOTHER_COMMAND = new Command<AnotherCommandParams, String>(
-            "Another Command");*/
+	public static final Command<ProfileCommandParams, String> PROFILE = new Command<ProfileCommandParams, String>(
+			"PROFILE");
 
-    private String name;
+	public static final Command<ResumeCommandParams, String> RESUME = new Command<ResumeCommandParams, String>(
+			"RESSUME");
 
-    private Command(String name) {
-        this.name = name;
-    }
+	public static final Command<QuitCommandParams, String> QUIT = new Command<QuitCommandParams, String>(
+			"QUIT");
 
-    public String getName() {
-        return name;
-    }
-}	
+	public static final Command<ContinueCommandParams, String> CONTINUE = new Command<ContinueCommandParams, String>(
+			"CONTINUE");
+
+	private String name;
+
+	/**
+	 * Instantiates a new command.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	private Command(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+}

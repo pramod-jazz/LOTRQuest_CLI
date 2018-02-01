@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package org.game.fantasy;
 
 import java.util.ArrayList;
@@ -14,20 +17,26 @@ import org.game.fantasy.command.handlers.QuitCommandHandler;
 import org.game.fantasy.command.handlers.ResumeCommandHandler;
 
 /**
- * Handles registering command handlers (binding them to commands) and
- * executing. I called this ApplicationContext but it can be any class that's
- * initialized on application startup and accessible to any code that needs to
- * execute commands. Most application frameworks have something like this.
+ * GameContext. Applied for game bootstrapping.
+ * 
+ * @author Pramod Nikam
+ * 
+ * 
+ * 
  */
 public class GameContext {
+
+	/** The command handler bindings. */
 	private List<CommandHandlerBinding> commandHandlerBindings = new ArrayList<>();
 
+	/**
+	 * Initialize application.
+	 */
 	public void initializeApplication() {
 
 		GameMetadata.setupCharacters();
 		GameMetadata.setupLevels();
 
-		
 		registerCommandHandler(Command.HELP, new HelpCommandHandler());
 		registerCommandHandler(Command.QUIT, new QuitCommandHandler());
 		registerCommandHandler(Command.RESUME, new ResumeCommandHandler());
@@ -36,12 +45,27 @@ public class GameContext {
 		registerCommandHandler(Command.CONTINUE, new ContinueCommandHandler());
 	}
 
+	/**
+	 * Instantiates a new game context.
+	 */
 	public GameContext() {
-		// super();
+
 		initializeApplication();
 
 	}
 
+	/**
+	 * Register command handler.
+	 *
+	 * @param <ParamType>
+	 *            the generic type
+	 * @param <ReturnType>
+	 *            the generic type
+	 * @param command
+	 *            the command
+	 * @param handler
+	 *            the handler
+	 */
 	public <ParamType, ReturnType> void registerCommandHandler(Command<ParamType, ReturnType> command,
 			CommandHandler<ParamType, ReturnType> handler) {
 		CommandHandler<ParamType, ReturnType> existingHandler = getCommandHandler(command);
@@ -53,9 +77,20 @@ public class GameContext {
 		commandHandlerBindings.add(new CommandHandlerBinding<ParamType, ReturnType>(command, handler));
 	}
 
+	/**
+	 * Gets the command handler.
+	 *
+	 * @param <ParamType>
+	 *            the generic type
+	 * @param <ReturnType>
+	 *            the generic type
+	 * @param command
+	 *            the command
+	 * @return the command handler
+	 */
 	private <ParamType, ReturnType> CommandHandler<ParamType, ReturnType> getCommandHandler(
 			Command<ParamType, ReturnType> command) {
-		// initializeApplication();
+
 		if (commandHandlerBindings != null) {
 			for (CommandHandlerBinding<ParamType, ReturnType> binding : commandHandlerBindings) {
 				if (binding.getCommand().getName().equals(command.getName())) {
@@ -66,6 +101,21 @@ public class GameContext {
 		return null;
 	}
 
+	/**
+	 * Execute command.
+	 *
+	 * @param <ParamType>
+	 *            the generic type
+	 * @param <ReturnType>
+	 *            the generic type
+	 * @param command
+	 *            the command
+	 * @param parameters
+	 *            the parameters
+	 * @return the return type
+	 * @throws Exception
+	 *             the exception
+	 */
 	public <ParamType, ReturnType> ReturnType executeCommand(Command<ParamType, ReturnType> command,
 			ParamType parameters) throws Exception {
 		CommandHandler<ParamType, ReturnType> handler = getCommandHandler(command);

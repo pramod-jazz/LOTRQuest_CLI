@@ -2,19 +2,32 @@ package org.game.fantasy.ui;
 
 import org.game.fantasy.controls.ConsoleController;
 
+
+/**
+ * The Class MiddleTile. You can attach as many as you want.
+ */
 public class MiddleTile implements DisplayUnit {
 
-    String tileName;
-    
-    ConsoleController printer = new ConsoleController();
+	/** The tile name. */
+	String tileName;
 
+	/** The printer. */
+	ConsoleController printer = new ConsoleController();
 
-    public MiddleTile(String tileName) {
-        this.tileName = tileName;
-    }
+	/**
+	 * Instantiates a new middle tile.
+	 *
+	 * @param tileName the tile name
+	 */
+	public MiddleTile(String tileName) {
+		this.tileName = tileName;
+	}
 
-    @Override
-    public void renderUI(boolean isSameLine) {
-    	printer.printToConsole(tileName,isSameLine);
-    }
+	/* (non-Javadoc)
+	 * @see org.game.fantasy.ui.DisplayUnit#renderUI(boolean)
+	 */
+	@Override
+	public void renderUI(boolean isSameLine) {
+		printer.printToConsole(tileName, isSameLine);
+	}
 }
