@@ -23,12 +23,12 @@ import junit.framework.Assert;
 @RunWith(MockitoJUnitRunner.class)
 public class CharacterDAOTest {
 
-	CharacterDAO subject;
+	private CharacterDAO subject;
 
 	@Mock
-	ObjectIOOperations objectIOOperations;
+	private ObjectIOOperations objectIOOperations;
 
-	List<GameCharacter> characters = new ArrayList<>();
+	private List<GameCharacter> characters = new ArrayList<>();
 
 	@Before
 	public void setUp() throws Exception {

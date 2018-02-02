@@ -21,12 +21,12 @@ import junit.framework.Assert;
 @RunWith(MockitoJUnitRunner.class)
 public class GameDetailsDAOTest {
 
-	GameDetailsDAO subject;
+	private GameDetailsDAO subject;
 
 	@Mock
-	ObjectIOOperations objectIOOperations;
+	private ObjectIOOperations objectIOOperations;
 
-	GameDetails details;
+	private GameDetails details;
 
 	@Before
 	public void setUp() throws Exception {

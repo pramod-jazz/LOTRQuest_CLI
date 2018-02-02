@@ -38,19 +38,19 @@ public class GameController extends GameControlBase {
 	final static Logger logger = Logger.getLogger(GameController.class);
 
 	/** The level DAO. */
-	LevelDAO levelDAO = new LevelDAO();
+	private LevelDAO levelDAO = new LevelDAO();
 
 	/** The player DAO. */
-	PlayerDAO playerDAO = new PlayerDAO();
+	private PlayerDAO playerDAO = new PlayerDAO();
 
 	/** The character DAO. */
-	CharacterDAO characterDAO = new CharacterDAO();
+	private CharacterDAO characterDAO = new CharacterDAO();
 
 	/** The game details DAO. */
-	GameDetailsDAO gameDetailsDAO = new GameDetailsDAO();
+	private GameDetailsDAO gameDetailsDAO = new GameDetailsDAO();
 
 	/** The console controller. */
-	ConsoleController consoleController = new ConsoleController();
+	private ConsoleController consoleController = new ConsoleController();
 
 	/** The is game compplete. */
 	private static boolean isGameCompplete = false;
@@ -119,7 +119,7 @@ public class GameController extends GameControlBase {
 	 * @throws Exception the exception
 	 */
 	public void help() throws Exception {
-		GameController.logger.info("Invoking map command");
+		logger.info("Invoking map command");
 		executeCommand(Command.HELP, new HelpCommandParams("Help"));
 
 	}
@@ -530,5 +530,40 @@ public class GameController extends GameControlBase {
 		}
 
 	}
+
+	public LevelDAO getLevelDAO() {
+		return levelDAO;
+	}
+
+	public void setLevelDAO(LevelDAO levelDAO) {
+		this.levelDAO = levelDAO;
+	}
+
+	public PlayerDAO getPlayerDAO() {
+		return playerDAO;
+	}
+
+	public void setPlayerDAO(PlayerDAO playerDAO) {
+		this.playerDAO = playerDAO;
+	}
+
+	public CharacterDAO getCharacterDAO() {
+		return characterDAO;
+	}
+
+	public void setCharacterDAO(CharacterDAO characterDAO) {
+		this.characterDAO = characterDAO;
+	}
+
+	public GameDetailsDAO getGameDetailsDAO() {
+		return gameDetailsDAO;
+	}
+
+	public void setGameDetailsDAO(GameDetailsDAO gameDetailsDAO) {
+		this.gameDetailsDAO = gameDetailsDAO;
+	}
+	
+	
+	
 
 }

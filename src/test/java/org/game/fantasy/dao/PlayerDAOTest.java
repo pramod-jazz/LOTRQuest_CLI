@@ -21,12 +21,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class PlayerDAOTest {
 
-	PlayerDAO subject;
+	private PlayerDAO subject;
 
 	@Mock
-	ObjectIOOperations objectIOOperations;
+	private ObjectIOOperations objectIOOperations;
 
-	Player dummy;
+	private Player dummy;
 
 	@Before
 	public void setUp() throws Exception {

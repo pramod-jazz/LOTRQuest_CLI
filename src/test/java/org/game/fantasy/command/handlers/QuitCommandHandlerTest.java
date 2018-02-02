@@ -12,22 +12,18 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ QuitCommandHandler.class, ConsoleController.class , System.class})
+@PrepareForTest({ QuitCommandHandler.class, ConsoleController.class, System.class })
 public class QuitCommandHandlerTest {
 
 	// @Mock
-	QuitCommandHandler quitCommand = new QuitCommandHandler();
+	private QuitCommandHandler quitCommand = new QuitCommandHandler();
 
 	@Before
 	public void setUp() {
 		PowerMockito.mockStatic(ConsoleController.class);
-		//PowerMockito.mockStatic(System.class);
 		PowerMockito.when(ConsoleController.readBoolean(anyString())).thenReturn(false);
-		/*Mockito.doNothing().when(System.class);
-        System.exit(0);*/
-	}
 
-	ConsoleController controller = new ConsoleController();
+	}
 
 	@Test
 	public void testExecute() throws Exception {

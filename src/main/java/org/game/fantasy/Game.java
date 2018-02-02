@@ -9,10 +9,10 @@ import org.apache.log4j.Logger;
 import org.game.fantasy.controls.GameController;
 
 public class Game {
-	/*
-	 * final static Logger logger = Logger.getLogger(Game.class);
-	 * 
-	 */ /**
+	
+	  final static Logger logger = Logger.getLogger(Game.class);
+	  
+	  /**
 		 * The main method.
 		 *
 		 * @param args
@@ -30,6 +30,7 @@ public class Game {
 		 * Game Controller is a one entry point or Facade for all external interactions.
 		 * 
 		 */
+		logger.info("initializing game");
 
 		GameController gameController = new GameController();
 

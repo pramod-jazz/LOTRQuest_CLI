@@ -21,7 +21,7 @@ public class ObjectIOIntegrationTest {
 	org.game.fantasy.model.GameCharacter dummy2;
 	List<org.game.fantasy.model.GameCharacter> dummyCharacters;
 
-	ObjectIOOperations objectIO = new ObjectIOOperations();
+	private ObjectIOOperations objectIO = new ObjectIOOperations();
 
 	@Test
 	public void testSaveObject() {
