@@ -33,3 +33,10 @@ To run game execute jar file using below command:
  - profile - See your points, details, and current level.
  - map - To see where are you on map of middle earth.
  - quit - To quit game in between.
+ 
+ 
+General Design Architecture of game looks like below:
+
+![enter image description here](https://github.com/pramod-jazz/LOTRQuest_CLI/blob/master/lotr_architecture.png)
+
+
