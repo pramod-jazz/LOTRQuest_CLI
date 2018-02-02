@@ -74,7 +74,7 @@ public class GameController extends GameControlBase {
 
 	public void help() throws Exception {
 		GameController.logger.info("Invoking map command");
-		executeCommand(Command.HELP, new HelpCommandParams("Helping World"));
+		executeCommand(Command.HELP, new HelpCommandParams("Help"));
 
 	}
 
@@ -86,7 +86,7 @@ public class GameController extends GameControlBase {
 
 	public void quit() throws Exception {
 		GameController.logger.info("Invoking quit command");
-		executeCommand(Command.QUIT, new QuitCommandParams("Quitting game"));
+		executeCommand(Command.QUIT, new QuitCommandParams("Quit"));
 
 	}
 
@@ -99,13 +99,13 @@ public class GameController extends GameControlBase {
 
 	public void continueGame1() throws Exception {
 		GameController.logger.info("Invoking contine command");
-		executeCommand(Command.CONTINUE, new ContinueCommandParams("Continuing game!"));
+		executeCommand(Command.CONTINUE, new ContinueCommandParams("Continue"));
 
 	}
 
 	public void resume() throws Exception {
 		GameController.logger.info("Invoking resume command");
-		executeCommand(Command.RESUME, new ResumeCommandParams("Resuming Game"));
+		executeCommand(Command.RESUME, new ResumeCommandParams("Resume"));
 
 	}
 
@@ -126,9 +126,6 @@ public class GameController extends GameControlBase {
 		} catch (final IOException e) {
 			throw new GameException("Serialization file IO exception Occured. Check the proper file location.", e);
 		}
-
-		// Stream.of(CharacterAvatar.values()).map(String::toLowerCase).collect(Collectors.toList()).forEach(System.out::println);
-		// Going to change this to java 8
 
 	}
 
@@ -174,7 +171,6 @@ public class GameController extends GameControlBase {
 				final Boolean clearStatus = ConsoleController
 						.readBoolean("Do you want to start from where you left last time? (yes | no ) ?  ");
 				if (!clearStatus) {
-					System.out.println("** clearing status");
 					existingPlayer.setCurrentLevel(1);
 					existingPlayer.setCharacter(null);
 					existingPlayer.setIsNew(false);
@@ -227,18 +223,6 @@ public class GameController extends GameControlBase {
 
 		} else {
 
-			/*
-			 * Player old = new Player();
-			 * 
-			 * newPlayer = acceptCreds(newPlayer);
-			 */
-			/*
-			 * String passphrase =
-			 * ConsoleController.readString("Please enter pass phrase : ",
-			 * "Please enter valid passphrase!");
-			 */
-
-			// status = validatePlayer(playerName);
 			final String playerName = getPlayerName();
 
 			boolean validationStatus = validatePlayer(playerName);
