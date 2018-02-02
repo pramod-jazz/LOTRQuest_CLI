@@ -1,0 +1,9 @@
+org.game.fantasy
+org.game.fantasy.command
+org.game.fantasy.command.handlers
+org.game.fantasy.command.params
+org.game.fantasy.controls
+org.game.fantasy.dao
+org.game.fantasy.exceptions
+org.game.fantasy.model
+org.game.fantasy.ui
