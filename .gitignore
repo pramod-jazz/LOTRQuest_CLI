@@ -3,12 +3,16 @@
 .settings/
 /*.ser
 *.ser
+workspaceGame_projectslotr
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+/*.eml
+*.eml
+/*.iml
 
 ### STS ###
 .apt_generated
