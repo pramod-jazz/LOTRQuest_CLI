@@ -126,7 +126,7 @@ public class ConsoleController {
 	 */
 	public static final boolean readYesNo(String prompt) {
 		String input = getYesOrNoTillSuccess(prompt).trim();
-		if (input.equalsIgnoreCase("yes")) {
+		if (input.trim().equalsIgnoreCase("yes")) {
 			return true;
 		}
 		return false;
@@ -142,8 +142,7 @@ public class ConsoleController {
 		String response = readLine(prompt).toLowerCase().trim();
 
 		if (!response.equalsIgnoreCase("yes") && !response.equalsIgnoreCase("no")) {
-			// System.err.println("Please enter valid input yes or no ..");
-			getYesOrNoTillSuccess(prompt);
+			response = getYesOrNoTillSuccess(prompt);
 		}
 
 		return response;
