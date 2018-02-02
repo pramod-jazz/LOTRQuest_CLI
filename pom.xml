@@ -25,10 +25,7 @@
 			<version>4.8</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-		<!-- <dependency> <groupId>org.mockito</groupId> <artifactId>mockito-core</artifactId> 
-			<version>2.8.9</version> <scope>test</scope> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -87,6 +84,19 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>attach-javadocs</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
 
 
 
@@ -113,123 +123,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.20.1</version>
+				<configuration>
+          <skipTests>true</skipTests>
+        </configuration>
 			</plugin>
 
 		</plugins>
 	</build>
 
-	<!-- <profiles>
-		<profile>
-			<id>QA</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<tasks>
-										<delete file="src/main/resources/application.properties" />
-										<copy
-											file="src/main/resources/QA_properties/application.properties"
-											tofile="src/main/resources/application.properties" />
-
-									</tasks>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>DEV</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<tasks>
-										<delete file="src/main/resources/application.properties" />
-										<copy file="src/main/resources/DEV/application.properties"
-											tofile="src/main/resources/application.properties" />
-
-									</tasks>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>PROD</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<tasks>
-										<delete file="src/main/resources/application.properties" />
-										<copy file="src/main/resources/PROD/application.properties"
-											tofile="src/main/resources/application.properties" />
-
-									</tasks>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>LOCAL</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>test</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<tasks>
-										<delete file="src/main/resources/application.properties" />
-										<copy file="src/main/resources/LOCAL/application.properties"
-											tofile="src/main/resources/application.properties" />
-
-									</tasks>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-
-	</profiles> -->
+	
 
 
 
