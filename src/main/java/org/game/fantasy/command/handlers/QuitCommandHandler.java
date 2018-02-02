@@ -18,7 +18,7 @@ public class QuitCommandHandler implements CommandHandler<QuitCommandParams, Str
 
 		Boolean verification = ConsoleController.readBoolean("Are tou sure you want to quit? (yes | no ) ?  ");
 		if (verification) {
-			ConsoleController.printMessageToConsole("Thanks for playing!! You can same middle earth some other day!!");
+			ConsoleController.printMessageToConsole("Thanks for playing!! You can save middle earth some other day!!");
 
 			System.exit(0);
 		}

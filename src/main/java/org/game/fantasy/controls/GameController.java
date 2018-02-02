@@ -154,20 +154,41 @@ public class GameController extends GameControlBase {
 	}
 
 	public boolean validatePlayer(final String name) {
-		Optional<Player> existingPlayer = Optional.empty();
+		Optional<Player> existingPlayerOptional = Optional.empty();
 		try {
-			existingPlayer = Optional.ofNullable(playerDAO.getDetails(name));
+			existingPlayerOptional = Optional.ofNullable(playerDAO.getDetails(name));
 		} catch (ClassNotFoundException | IOException e) {
 			throw new GameException("Fatal Exception", e);
+		} catch (Exception e) {
+			ConsoleController.printMessageToConsole("Mentioned user is not present");
+			return false;
 		}
-		if (existingPlayer.isPresent()) {
+		if (existingPlayerOptional.isPresent()) {
+			Player existingPlayer = existingPlayerOptional.get();
 
-			final GameDetails gameDetails = new GameDetails(existingPlayer.get().getId(),
-					existingPlayer.get().getName(), existingPlayer.get().getCurrentLevel());
+			final GameDetails gameDetails = new GameDetails(existingPlayer.getId(),
+					existingPlayer.getName(), existingPlayer.getCurrentLevel());
 			try {
-				clearState(existingPlayer.get(), gameDetails);
+				//clearState(existingPlayer.get(), gameDetails);
+				
+				final Boolean clearStatus = ConsoleController
+						.readBoolean("Do you want to start from where you left last time? (yes | no ) ?  ");
+				if (!clearStatus) {
+					System.out.println("** clearing status");
+					existingPlayer.setCurrentLevel(1);
+					existingPlayer.setCharacter(null);
+					existingPlayer.setIsNew(false);
+					existingPlayer.setIsChoiceSet(false);
+					existingPlayer.setPoints(0);
+
+					gameDetails.setCurrentLevel(0);
+					gameDetails.setLoggedInUserName(existingPlayer.getName());
+					gameDetails.setPlayerId(existingPlayer.getId());
+				}
+				ConsoleController.printGap();
 
 				gameDetailsDAO.save(gameDetails);
+				playerDAO.save(existingPlayer);
 			} catch (final IOException e) {
 				throw new GameException("Fatal error occured!", e);
 			}
@@ -220,7 +241,10 @@ public class GameController extends GameControlBase {
 			// status = validatePlayer(playerName);
 			final String playerName = getPlayerName();
 
-			validatePlayer(playerName);
+			boolean validationStatus = validatePlayer(playerName);
+			if (!validationStatus) {
+				initialisePlayer();
+			}
 
 		}
 
@@ -235,26 +259,6 @@ public class GameController extends GameControlBase {
 		return playerName;
 	}
 
-	private void clearState(final Player player, final GameDetails gameDetails) {
-		final Boolean clearStatus = ConsoleController
-				.readBoolean("Do you want to start from where you left last time? (yes | no ) ?  ");
-		if (clearStatus) {
-			player.setCurrentLevel(1);
-			player.setCharacter(null);
-			player.setIsNew(false);
-			player.setIsChoiceSet(false);
-			player.setPoints(0);
-
-			gameDetails.setCurrentLevel(0);
-		}
-		ConsoleController.printGap();
-		try {
-			profile(player);
-		} catch (final Exception e) {
-			throw new GameException("Fatal error occured!", e);
-		}
-		ConsoleController.printGap();
-	}
 
 	public void setCharacterChoice() {
 		GameDetails gameDetails;
@@ -299,6 +303,8 @@ public class GameController extends GameControlBase {
 			}
 
 			showChoicedCharacter();
+			
+		    introduceLevel(1);
 
 		}
 	}
@@ -318,7 +324,7 @@ public class GameController extends GameControlBase {
 			ConsoleController
 					.printMessageToConsole("You have selected choice number " + character.getId() + " who is :");
 
-			new MiddleTile(character.getCharacterName() + ".txt").renderUI(false);
+			new MiddleTile(character.getCharacterName().toLowerCase() + ".txt").renderUI(false);
 
 		} catch (ClassNotFoundException | IOException e) {
 			new GameException("Fatal Exception Occured!", e);
@@ -347,7 +353,8 @@ public class GameController extends GameControlBase {
 		new MiddleTile("level" + levelNumber + ".txt").renderUI(false);
 		ConsoleController.printGap();
 		ConsoleController
-				.printMessageToConsole(" Read all commands carefully. Type play command to play game at first level.");
+				.printMessageToConsole("Read all commands carefully.You can type help command for understanding commands.");
+		ConsoleController.printMessageToConsole("Currentlyyou can type play command to play game at first level.");
 
 	}
 

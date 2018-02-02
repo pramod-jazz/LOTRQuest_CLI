@@ -9,10 +9,10 @@ import org.apache.log4j.Logger;
 import org.game.fantasy.controls.GameController;
 
 public class Game {
-
+/*
 	final static Logger logger = Logger.getLogger(Game.class);
 
-	/**
+*/	/**
 	 * The main method.
 	 *
 	 * @param args
@@ -25,8 +25,9 @@ public class Game {
 	 * 
 	 */
 	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		System.out.println("** I am here");
 
-		logger.info("Starting Game...");
 
 		/*
 		 * Game Controller is a one entry point or Facade for all external interactions.
@@ -38,8 +39,8 @@ public class Game {
 		gameController.showGreetings();
 		gameController.initialisePlayer();
 		gameController.setCharacterChoice();
-		gameController.addDelayAndGap(5);
-		gameController.introduceLevel(1);
+		gameController.addDelayAndGap(2);
+		
 		gameController.readCommand();
 
 	}

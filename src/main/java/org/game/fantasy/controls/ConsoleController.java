@@ -22,6 +22,10 @@ public class ConsoleController {
 
 	/** The scanner. */
 	static Scanner scanner = new Scanner(System.in);
+	
+	private static final String DEFAULT_PROMPT = "Enter input: ";
+	private static final String DEFAULT_RETRY = "Invalid Input. Try again.";
+
 
 	/**
 	 * Prints the to console.
@@ -30,6 +34,7 @@ public class ConsoleController {
 	 * @param isSameLine the is same line
 	 */
 	public void printToConsole(String filePath, boolean isSameLine) {
+		
 		try (BufferedReader reader = new BufferedReader(
 				new InputStreamReader(Header.class.getClassLoader().getResourceAsStream(filePath)))) {
 			reader.lines().forEach(isSameLine ? System.out::println : System.out::println);
@@ -113,14 +118,6 @@ public class ConsoleController {
 	}
 
 
-
-	
-
-	private static final String DEFAULT_PROMPT = "Enter input: ";
-	
-
-	private static final String DEFAULT_RETRY = "Invalid Input. Try again.";
-
 	/**
 	 * Read yes no.
 	 *
@@ -128,7 +125,7 @@ public class ConsoleController {
 	 * @return true, if successful
 	 */
 	public static final boolean readYesNo(String prompt) {
-		String input = getYesOrNoTillSuccess(prompt);
+		String input = getYesOrNoTillSuccess(prompt).trim();
 		if (input.equalsIgnoreCase("yes")) {
 			return true;
 		}

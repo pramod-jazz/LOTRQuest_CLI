@@ -89,6 +89,26 @@
 			</plugin>
 
 
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<!-- put your configurations here -->
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -98,7 +118,7 @@
 		</plugins>
 	</build>
 
-	<profiles>
+	<!-- <profiles>
 		<profile>
 			<id>QA</id>
 			<build>
@@ -113,11 +133,10 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<delete
-											file="${project.build.outputDirectory}/application.properties" />
+										<delete file="src/main/resources/application.properties" />
 										<copy
 											file="src/main/resources/QA_properties/application.properties"
-											tofile="${project.build.outputDirectory}/application.properties" />
+											tofile="src/main/resources/application.properties" />
 
 									</tasks>
 								</configuration>
@@ -142,10 +161,9 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<delete
-											file="${project.build.outputDirectory}/application.properties" />
+										<delete file="src/main/resources/application.properties" />
 										<copy file="src/main/resources/DEV/application.properties"
-											tofile="${project.build.outputDirectory}/application.properties" />
+											tofile="src/main/resources/application.properties" />
 
 									</tasks>
 								</configuration>
@@ -170,10 +188,9 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<delete
-											file="${project.build.outputDirectory}/application.properties" />
+										<delete file="src/main/resources/application.properties" />
 										<copy file="src/main/resources/PROD/application.properties"
-											tofile="${project.build.outputDirectory}/application.properties" />
+											tofile="src/main/resources/application.properties" />
 
 									</tasks>
 								</configuration>
@@ -198,10 +215,9 @@
 								</goals>
 								<configuration>
 									<tasks>
-										<delete
-											file="${project.build.outputDirectory}/application.properties" />
+										<delete file="src/main/resources/application.properties" />
 										<copy file="src/main/resources/LOCAL/application.properties"
-											tofile="${project.build.outputDirectory}/application.properties" />
+											tofile="src/main/resources/application.properties" />
 
 									</tasks>
 								</configuration>
@@ -213,7 +229,7 @@
 		</profile>
 
 
-	</profiles>
+	</profiles> -->
 
 
 
