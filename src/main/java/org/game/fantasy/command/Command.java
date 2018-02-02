@@ -5,10 +5,11 @@ import org.game.fantasy.command.params.HelpCommandParams;
 import org.game.fantasy.command.params.MapCommandParams;
 import org.game.fantasy.command.params.ProfileCommandParams;
 import org.game.fantasy.command.params.QuitCommandParams;
-import org.game.fantasy.command.params.ResumeCommandParams;
 
 /**
  * The Class Command.
+ * 
+ * @author Pramod Nikam
  *
  * @param <ParamType>
  *            the generic type
@@ -25,9 +26,6 @@ public class Command<ParamType, ReturnType> {
 
 	public static final Command<ProfileCommandParams, String> PROFILE = new Command<ProfileCommandParams, String>(
 			"PROFILE");
-
-	public static final Command<ResumeCommandParams, String> RESUME = new Command<ResumeCommandParams, String>(
-			"RESSUME");
 
 	public static final Command<QuitCommandParams, String> QUIT = new Command<QuitCommandParams, String>(
 			"QUIT");

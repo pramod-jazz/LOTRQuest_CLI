@@ -12,7 +12,6 @@ import org.game.fantasy.command.params.HelpCommandParams;
 import org.game.fantasy.command.params.MapCommandParams;
 import org.game.fantasy.command.params.ProfileCommandParams;
 import org.game.fantasy.command.params.QuitCommandParams;
-import org.game.fantasy.command.params.ResumeCommandParams;
 import org.game.fantasy.dao.CharacterDAO;
 import org.game.fantasy.dao.GameDetailsDAO;
 import org.game.fantasy.dao.LevelDAO;
@@ -25,40 +24,79 @@ import org.game.fantasy.ui.DisplayUnit;
 import org.game.fantasy.ui.Header;
 import org.game.fantasy.ui.MiddleTile;
 
+
+/**
+ * Main Controller Facade class for Game. One Class Entry to external world.
+ * 
+ * @author Pramod Nikam
+ * 
+ * The Class GameController.
+ */
 public class GameController extends GameControlBase {
 
+	/** The Constant logger. */
 	final static Logger logger = Logger.getLogger(GameController.class);
 
+	/** The level DAO. */
 	LevelDAO levelDAO = new LevelDAO();
 
+	/** The player DAO. */
 	PlayerDAO playerDAO = new PlayerDAO();
 
+	/** The character DAO. */
 	CharacterDAO characterDAO = new CharacterDAO();
 
+	/** The game details DAO. */
 	GameDetailsDAO gameDetailsDAO = new GameDetailsDAO();
 
+	/** The console controller. */
 	ConsoleController consoleController = new ConsoleController();
 
+	/** The is game compplete. */
 	private static boolean isGameCompplete = false;
 
+	/** The is game aborted. */
 	private static boolean isGameAborted = false;
 
+	/**
+	 * Checks if is game compplete.
+	 *
+	 * @return true, if is game compplete
+	 */
 	public static boolean isGameCompplete() {
 		return GameController.isGameCompplete;
 	}
 
+	/**
+	 * Sets the game compplete.
+	 *
+	 * @param isGameCompplete the new game compplete
+	 */
 	public static void setGameCompplete(final boolean isGameCompplete) {
 		GameController.isGameCompplete = isGameCompplete;
 	}
 
+	/**
+	 * Checks if is game aborted.
+	 *
+	 * @return true, if is game aborted
+	 */
 	public static boolean isGameAborted() {
 		return GameController.isGameAborted;
 	}
 
+	/**
+	 * Sets the game aborted.
+	 *
+	 * @param isGameAborted the new game aborted
+	 */
 	public static void setGameAborted(final boolean isGameAborted) {
 		GameController.isGameAborted = isGameAborted;
 	}
 
+	/**
+	 * Show greetings.
+	 */
 	public void showGreetings() {
 		final DisplayUnit header = new Header();
 		header.renderUI(false);
@@ -67,29 +105,54 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Show gandalf.
+	 */
 	public void showGandalf() {
 		final DisplayUnit gandalfImage = new MiddleTile("gandalf.txt");
 		gandalfImage.renderUI(false);
 	}
 
+	/**
+	 * Help.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void help() throws Exception {
 		GameController.logger.info("Invoking map command");
 		executeCommand(Command.HELP, new HelpCommandParams("Help"));
 
 	}
 
+	/**
+	 * Map.
+	 *
+	 * @param player the player
+	 * @throws Exception the exception
+	 */
 	public void map(final Player player) throws Exception {
 		GameController.logger.info("Invoking map command");
 		executeCommand(Command.MAP, new MapCommandParams(player.getCurrentLevel()));
 
 	}
 
+	/**
+	 * Quit.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void quit() throws Exception {
 		GameController.logger.info("Invoking quit command");
 		executeCommand(Command.QUIT, new QuitCommandParams("Quit"));
 
 	}
 
+	/**
+	 * Profile.
+	 *
+	 * @param player the player
+	 * @throws Exception the exception
+	 */
 	public void profile(final Player player) throws Exception {
 		GameController.logger.info("Invoking profile command");
 		executeCommand(Command.PROFILE,
@@ -97,18 +160,20 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Continue game 1.
+	 *
+	 * @throws Exception the exception
+	 */
 	public void continueGame1() throws Exception {
 		GameController.logger.info("Invoking contine command");
 		executeCommand(Command.CONTINUE, new ContinueCommandParams("Continue"));
 
 	}
 
-	public void resume() throws Exception {
-		GameController.logger.info("Invoking resume command");
-		executeCommand(Command.RESUME, new ResumeCommandParams("Resume"));
-
-	}
-
+	/**
+	 * Show characters.
+	 */
 	public void showCharacters() {
 
 		List<GameCharacter> gameCharacters;
@@ -129,6 +194,12 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Accept creds.
+	 *
+	 * @param player the player
+	 * @return the player
+	 */
 	public Player acceptCreds(final Player player) {
 
 		final String playerName = ConsoleController.readString("Please enter your name : ", "Please enter valid name!");
@@ -143,6 +214,12 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Fill new player.
+	 *
+	 * @param player the player
+	 * @param playerName the player name
+	 */
 	private void fillNewPlayer(final Player player, final String playerName) {
 		player.setName(playerName);
 		player.setCharacter(0);
@@ -150,6 +227,12 @@ public class GameController extends GameControlBase {
 		player.setPoints(0);
 	}
 
+	/**
+	 * Validate player.
+	 *
+	 * @param name the name
+	 * @return true, if successful
+	 */
 	public boolean validatePlayer(final String name) {
 		Optional<Player> existingPlayerOptional = Optional.empty();
 		try {
@@ -197,6 +280,9 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Initialise player.
+	 */
 	public void initialisePlayer() {
 		final Boolean verification = ConsoleController.readBoolean("Are you a new player? (yes | no ) ?  ");
 
@@ -234,6 +320,11 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Gets the player name.
+	 *
+	 * @return the player name
+	 */
 	private String getPlayerName() {
 		final String playerName = ConsoleController.readString("Please enter your name ", "Please enter valid name!!");
 		if (playerName.trim().equalsIgnoreCase("")) {
@@ -243,6 +334,9 @@ public class GameController extends GameControlBase {
 		return playerName;
 	}
 
+	/**
+	 * Sets the character choice.
+	 */
 	public void setCharacterChoice() {
 		GameDetails gameDetails;
 		Player player = new Player();
@@ -257,8 +351,7 @@ public class GameController extends GameControlBase {
 			showGandalf();
 			showCharacters();
 
-			// Optional<Integer> option = consoleController.getIntegerUserInput("Please
-			// enter which character do you want to possess? :");
+			
 			final Optional<Integer> option = Optional.ofNullable(ConsoleController.readInteger(
 					"Please enter serial number of which character do you want to possess? :",
 					"Wrong input !! Please make valid input between 1 to " + GameMetadata.getTotalCharacters()));
@@ -292,6 +385,9 @@ public class GameController extends GameControlBase {
 		}
 	}
 
+	/**
+	 * Show choiced character.
+	 */
 	public void showChoicedCharacter() {
 		Player player;
 		GameCharacter character;
@@ -315,6 +411,11 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Adds the delay and gap.
+	 *
+	 * @param seconds the seconds
+	 */
 	public void addDelayAndGap(final Integer seconds) {
 		ConsoleController.printGap();
 		try {
@@ -327,6 +428,11 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Introduce level.
+	 *
+	 * @param levelNumber the level number
+	 */
 	public void introduceLevel(final Integer levelNumber) {
 
 		System.out.flush();
@@ -341,6 +447,11 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Resolve and execute command.
+	 *
+	 * @param command the command
+	 */
 	public void resolveAndExecuteCommand(final String command) {
 		GameDetails gameDetails;
 
@@ -406,6 +517,9 @@ public class GameController extends GameControlBase {
 
 	}
 
+	/**
+	 * Read command.
+	 */
 	public void readCommand() {
 		final String command = ConsoleController.readString("Enter your command hobbit :");
 		resolveAndExecuteCommand(command.toLowerCase());

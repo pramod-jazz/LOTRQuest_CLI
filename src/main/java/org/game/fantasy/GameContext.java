@@ -14,7 +14,6 @@ import org.game.fantasy.command.handlers.HelpCommandHandler;
 import org.game.fantasy.command.handlers.MapCommandHandler;
 import org.game.fantasy.command.handlers.ProfileCommandHandler;
 import org.game.fantasy.command.handlers.QuitCommandHandler;
-import org.game.fantasy.command.handlers.ResumeCommandHandler;
 
 /**
  * GameContext. Applied for game bootstrapping.
@@ -39,7 +38,6 @@ public class GameContext {
 
 		registerCommandHandler(Command.HELP, new HelpCommandHandler());
 		registerCommandHandler(Command.QUIT, new QuitCommandHandler());
-		registerCommandHandler(Command.RESUME, new ResumeCommandHandler());
 		registerCommandHandler(Command.PROFILE, new ProfileCommandHandler());
 		registerCommandHandler(Command.MAP, new MapCommandHandler());
 		registerCommandHandler(Command.CONTINUE, new ContinueCommandHandler());
