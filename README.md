@@ -34,6 +34,25 @@ Extract target/LOTR_Quest-javadoc.jar into folder.
 
 Then open index.html with browser.
 
+**To run tests use following command:**
+
+    ./mvnw test (Linux)
+
+or 
+
+    mvnw.cmd test (Windows)
+
+**To see test report use following command:**
+
+    ./mvnw site (Linux)
+
+or 
+
+    mvnw.cmd site (Windows)
+
+**and then you can find test report at following location:**
+
+    target/site/surefire-report.html
 
 **Commands that you are going to use are shown below:**
 
