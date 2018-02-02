@@ -2,6 +2,9 @@
 Welcome to Lord of the Rings console game. Greetings from me.
 
 
+![game banner](https://github.com/pramod-jazz/LOTRQuest_CLI/blob/master/banner.png)
+
+
 This is simple game where you will be shown to the orcs at various parts of Middle Earth. There are in all 5 stages in this game. In every stage the speed of Arrow from the orc is going to increase. You need to avoid the arrow by pressing enter on console. As the intensity or speed will increase similarly points awarded to you will also increase. 
 
 As this is command line game you need to enter commands to play Game. 
@@ -37,6 +40,6 @@ To run game execute jar file using below command:
  
 General Design Architecture of game looks like below:
 
-![enter image description here](https://github.com/pramod-jazz/LOTRQuest_CLI/blob/master/lotr_architecture.png)
+![game architecture](https://github.com/pramod-jazz/LOTRQuest_CLI/blob/master/lotr_architecture.png)
 
 
