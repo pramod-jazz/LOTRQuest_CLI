@@ -1,42 +1,39 @@
 package org.game.fantasy.dao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.game.fantasy.model.Level;
 
+
+/**
+ * The Class LevelDAO.
+ * 
+ * @author Pramod Nikam
+ */
 public class LevelDAO {
 
+	/** The object IO. */
 	ObjectIOOperations objectIO = new ObjectIOOperations();
 
-	@SuppressWarnings("unchecked")
-	public List<Level> findAll() throws ClassNotFoundException, IOException {
-
-		List<Level> levels = new ArrayList<Level>();
-		levels.addAll((List<Level>) objectIO.deserialize("characters.ser"));
-
-		return levels;
-	}
-
 	/**
-	 * Save.
+	 * Save all.
 	 *
-	 * @param level the level
+	 * @param levels the levels
 	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @throws ClassNotFoundException the class not found exception
 	 */
-	public void save(Level level) throws IOException, ClassNotFoundException {
-
-		List<Level> levels = findAll();
-		levels.add(level);
-
-		saveAll(levels);
-	}
-
 	public void saveAll(List<Level> levels) throws IOException {
 
 		objectIO.serialize(levels, "levels.ser");
+	}
+
+	/**
+	 * Sets the object IO.
+	 *
+	 * @param objectIO the new object IO
+	 */
+	public void setObjectIO(ObjectIOOperations objectIO) {
+		this.objectIO = objectIO;
 	}
 
 }

@@ -44,4 +44,10 @@ public class PlayerDAO {
 		objectIO.serialize(player, player.getName() + ".ser");
 	}
 
+	public void setObjectIO(ObjectIOOperations objectIO) {
+		this.objectIO = objectIO;
+	}
+	
+	
+
 }

@@ -40,4 +40,14 @@ public class GameDetailsDAO {
 		objectIO.serialize(details, "gamedetails.ser");
 	}
 
+	public ObjectIOOperations getObjectIO() {
+		return objectIO;
+	}
+
+	public void setObjectIO(ObjectIOOperations objectIO) {
+		this.objectIO = objectIO;
+	}
+	
+	
+
 }
