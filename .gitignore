@@ -10,9 +10,8 @@ workspaceGame_projectslotr
 *.iws
 *.iml
 *.ipr
-/*.eml
-*.eml
-/*.iml
+LOTRQuest_CLI.eml
+
 
 ### STS ###
 .apt_generated
