@@ -45,7 +45,7 @@ public class ContinueCommandHandler implements CommandHandler<ContinueCommandPar
 		new MiddleTile("frodo_strict.txt").renderUI(true);
 		boolean isInturrupted = false;
 
-		final Integer levelThreshould = 1;
+		final Integer levelThreshould = 2;
 		final Optional<GameDetails> gameDetailsOptional = gameDetailsDAO.getDetails();
 
 		if (gameDetailsOptional.isPresent()) {
