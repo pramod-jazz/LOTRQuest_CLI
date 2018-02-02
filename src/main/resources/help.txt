@@ -10,9 +10,8 @@ profile - See your points, details, and current level.
 
 map - To see where are you on map of middle earth.
 
-quit - to quit game in between.`
+quit - to quit game in between.
 
-resume - to start game from first level.
 
 
 

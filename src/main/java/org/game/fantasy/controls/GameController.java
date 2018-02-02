@@ -115,10 +115,10 @@ public class GameController extends GameControlBase {
 		try {
 			gameCharacters = characterDAO.findAll();
 
-			int counter = 1;
 			for (final GameCharacter character : gameCharacters) {
 				new MiddleTile(character.getCharacterAvatar().toLowerCase() + ".txt").renderUI(false);
-				counter++;
+				ConsoleController.printGap();
+
 			}
 
 		} catch (final ClassNotFoundException e) {
@@ -169,8 +169,8 @@ public class GameController extends GameControlBase {
 			final GameDetails gameDetails = new GameDetails(existingPlayer.getId(),
 					existingPlayer.getName(), existingPlayer.getCurrentLevel());
 			try {
-				//clearState(existingPlayer.get(), gameDetails);
-				
+				// clearState(existingPlayer.get(), gameDetails);
+
 				final Boolean clearStatus = ConsoleController
 						.readBoolean("Do you want to start from where you left last time? (yes | no ) ?  ");
 				if (!clearStatus) {
@@ -259,7 +259,6 @@ public class GameController extends GameControlBase {
 		return playerName;
 	}
 
-
 	public void setCharacterChoice() {
 		GameDetails gameDetails;
 		Player player = new Player();
@@ -277,7 +276,7 @@ public class GameController extends GameControlBase {
 			// Optional<Integer> option = consoleController.getIntegerUserInput("Please
 			// enter which character do you want to possess? :");
 			final Optional<Integer> option = Optional.ofNullable(ConsoleController.readInteger(
-					"Please enter which character do you want to possess? :",
+					"Please enter serial number of which character do you want to possess? :",
 					"Wrong input !! Please make valid input between 1 to " + GameMetadata.getTotalCharacters()));
 			if (option.isPresent()) {
 				final Integer choice = option.get();
@@ -303,8 +302,8 @@ public class GameController extends GameControlBase {
 			}
 
 			showChoicedCharacter();
-			
-		    introduceLevel(1);
+
+			introduceLevel(1);
 
 		}
 	}
@@ -354,7 +353,7 @@ public class GameController extends GameControlBase {
 		ConsoleController.printGap();
 		ConsoleController
 				.printMessageToConsole("Read all commands carefully.You can type help command for understanding commands.");
-		ConsoleController.printMessageToConsole("Currentlyyou can type play command to play game at first level.");
+		ConsoleController.printMessageToConsole("Currently you can type play command to play game at first level.");
 
 	}
 
@@ -425,7 +424,7 @@ public class GameController extends GameControlBase {
 
 	public void readCommand() {
 		final String command = ConsoleController.readString("Enter your command hobbit :");
-		resolveAndExecuteCommand(command);
+		resolveAndExecuteCommand(command.toLowerCase());
 
 		while (!GameController.isGameCompplete || !GameController.isGameAborted) {
 			addDelayAndGap(2);
