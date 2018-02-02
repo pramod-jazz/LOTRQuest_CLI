@@ -27,6 +27,12 @@ If you are in Windows environment then use below command:
 To run game execute jar file using below command: 
 
     java  -jar  target/LOTR_Quest.jar
+    
+**To see Application Javadoc do following :**
+
+Extract target/LOTR_Quest-javadoc.jar into folder.
+
+Then open index.html with browser.
 
 
 **Commands that you are going to use are shown below:**
